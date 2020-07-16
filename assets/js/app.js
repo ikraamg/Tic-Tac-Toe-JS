@@ -1,9 +1,9 @@
 const Player = (name, symbol) => {
   const arr = [];
-  const hasWon = (winArr, playerArr) => {
+  const hasWon = function (winArr) {
     let result = false;
     winArr.forEach((winCondition) => {
-      if (playerArr.includes(winCondition[0]) && playerArr.includes(winCondition[1]) && playerArr.includes(winCondition[2])) {
+      if (this.arr.includes(winCondition[0]) && this.arr.includes(winCondition[1]) && this.arr.includes(winCondition[2])) {
         result = true;
       }
     });
@@ -25,30 +25,33 @@ const GameBoard = (() => {
 
 const GameRound = () => {
   const moveCount = 0;
-  const isDraw = (moveCount) => {
-    console.log('isDraw -> moveCount', moveCount);
-    return moveCount > 8;
+  
+  const isDraw = function () {
+    console.log(this, "this in gameround")
+    console.log('isDraw -> moveCount', this.moveCount);
+    return this.moveCount > 8;
   };
-  const getCurrentPlayer = (player1, player2, round) => {
-    round.moveCount += 1;
-    if (round.moveCount % 2 === 0) {
+  const getCurrentPlayer = function (player1, player2) {
+    this.moveCount += 1;
+    if (this.moveCount % 2 === 0) {
       return player1;
     }
     return player2;
   };
-  const playerMove = (index, round, displayController, player1, player2, initializeGame) => {
+  const playerMove = function (index, displayController, player1, player2, initializeGame) {
     if (GameBoard.testBoard[index] === '') {
-      const currentPlayer = round.getCurrentPlayer(player1, player2, round);
+      console.log(this, 'in player move')
+      const currentPlayer = this.getCurrentPlayer(player1, player2);
       const currentBlock = document.querySelector(`.block${index + 1}`);
       displayController.replaceText(currentBlock, currentPlayer.symbol);
       GameBoard.testBoard[index] = currentPlayer.symbol;
       currentPlayer.arr.push(index);
-      if (currentPlayer.hasWon(GameBoard.wA, currentPlayer.arr)) {
+      if (currentPlayer.hasWon(GameBoard.wA)) {
         console.log(`${currentPlayer.name} has won!`);
         initializeGame();
       }
 
-      if (round.isDraw(round.moveCount)) {
+      if (this.isDraw()) {
         console.log('Draw');
       }
     } else {

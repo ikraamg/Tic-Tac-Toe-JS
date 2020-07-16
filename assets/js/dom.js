@@ -11,7 +11,7 @@ const displayController = (() => {
     board.forEach((letter, index) => {
       const block = document.querySelector(`.block${index + 1}`);
       if (GameBoard.gamesPlayed === 0) {
-        block.addEventListener('click', () => round.playerMove(index, round, displayController, player1, player2, initializeGame));
+        block.addEventListener('click', () => round.playerMove(index, displayController, player1, player2, initializeGame));
       }
       block.textContent = letter;
     });
