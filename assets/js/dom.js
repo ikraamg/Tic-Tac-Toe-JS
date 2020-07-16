@@ -1,10 +1,11 @@
-const testBoard = ['X', 'X', 'O', 'X', 'O', 'X', 'O', 'X', 'O'];
+let testBoard = ['', '', '', '', '', '', '', '', ''];
+let gamesPlayed = 0;
 let moveCount = 0;
 const wA = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
 
 
 const hasWon = (playerArray) => {
-  let result = false
+  let result = false;
   wA.forEach((winCondition) => {
     if (playerArray.includes(winCondition[0]) && playerArray.includes(winCondition[1]) && playerArray.includes(winCondition[2])) {
       result = true;
@@ -16,10 +17,12 @@ const hasWon = (playerArray) => {
 const renderBoard = (board) => {
   board.forEach((letter, index) => {
     const block = document.querySelector(`.block${index + 1}`);
-    block.addEventListener('click', () => { playerMove(index); });
+    if (gamesPlayed === 0) {
+      block.addEventListener('click', () => playerMove(index));
+    }
     // const span = document.createElement('span');
     // span.textContent = letter;
-    block.textContent = letter
+    block.textContent = letter;
     // block.append(span);
   });
 };
@@ -30,20 +33,32 @@ const Player = (name, symbol) => {
   return { name, symbol, arr };
 };
 
-const playBtn = document.querySelector('#play')
-let player1
-let player2
-const initializeGame = () => {
-  testBoard.fill('');
-  const name1 = document.querySelector('#player1').value
-  const name2 = document.querySelector('#player2').value
-  player1 = Player(name1, 'X');
-  player2 = Player(name2, 'O');
-  renderBoard(testBoard);
-  console.log('Game started')
-  return { player1, player2 }
-}
+const playBtn = document.querySelector('#play');
+const resetBtn = document.querySelector('#reset');
+let player1;
+let player2;
 
+const initializeGame = () => {
+  testBoard = ['', '', '', '', '', '', '', '', ''];
+  if (gamesPlayed === 0) {
+    const name1 = document.querySelector('#player1').value;
+    const name2 = document.querySelector('#player2').value;
+    player1 = Player(name1, 'X');
+    player2 = Player(name2, 'O');
+  }
+  player1.arr = [];
+  player2.arr = [];
+  moveCount = 0;
+  renderBoard(testBoard);
+  gamesPlayed += 1;
+  console.log('Game started');
+  return { player1, player2 };
+};
+
+// const resetGame = () => {
+//   gamesPlayed = 0;
+//   initializeGame();
+// };
 
 
 // const addListener = (element, method) => {
@@ -58,9 +73,11 @@ const playerOutput = () => {
   }
   return player2;
 };
-
+let loop = 0;
 const playerMove = (index) => {
   if (testBoard[index] === '') {
+    loop++;
+    console.log('im here');
     const currentPlayer = playerOutput();
     // document.querySelector(`.block${index + 1}`).firstChild.textContent = currentPlayer.symbol;
     document.querySelector(`.block${index + 1}`).textContent = currentPlayer.symbol;
@@ -68,16 +85,22 @@ const playerMove = (index) => {
     testBoard[index] = currentPlayer.symbol;
     currentPlayer.arr.push(index);
     if (hasWon(currentPlayer.arr)) {
-      window.alert(`${currentPlayer.name} has won!`);
-      initializeGame()
+      console.log(`${currentPlayer.name} has won!`);
+      initializeGame();
     }
 
     if (isDraw()) {
-      window.alert("Draw")
+      console.log('Draw');
     }
   } else {
-    window.alert('Please select an open block.');
+    loop++;
+    console.log(testBoard[index]);
+    console.log('already clicked');
+    // window.alert('Please select an open block.');
   }
+  console.log('playerMove -> loop', loop);
 };
 
-playBtn.addEventListener('click',initializeGame)
+
+playBtn.addEventListener('click', initializeGame);
+resetBtn.addEventListener('click', initializeGame);
