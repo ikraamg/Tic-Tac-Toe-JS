@@ -1,12 +1,17 @@
 // eslint-disable-next-line import/extensions
-import { Player, GameBoard } from './app.js';
+import { Player, GameBoard, GameRound } from './app.js';
+
+let player1;
+let player2;
+const round = GameRound();
+
 
 const displayController = (() => {
   const renderBoard = (board) => {
     board.forEach((letter, index) => {
       const block = document.querySelector(`.block${index + 1}`);
       if (GameBoard.gamesPlayed === 0) {
-        block.addEventListener('click', () => playerMove(index));
+        block.addEventListener('click', () => round.playerMove(index, round, displayController, player1, player2, initializeGame));
       }
       block.textContent = letter;
     });
@@ -18,11 +23,11 @@ const displayController = (() => {
     playBtn.addEventListener('click', initializeGame);
     resetBtn.addEventListener('click', initializeGame);
   };
-  return { renderBoard, btnListners };
+  const replaceText = (element, value) => {
+    element.textContent = value;
+  };
+  return { renderBoard, btnListners, replaceText };
 })();
-
-let player1;
-let player2;
 
 const initializeGame = () => {
   GameBoard.testBoard = ['', '', '', '', '', '', '', '', ''];
@@ -32,48 +37,13 @@ const initializeGame = () => {
     player1 = Player(name1, 'X');
     player2 = Player(name2, 'O');
   }
-  console.log(player1, 'player 1');
   player1.arr = [];
   player2.arr = [];
-  GameBoard.moveCount = 0;
+  round.moveCount = 0;
   displayController.renderBoard(GameBoard.testBoard);
   GameBoard.gamesPlayed += 1;
   console.log('Game started');
   return { player1, player2 };
-};
-
-
-const getCurrentPlayer = () => {
-  GameBoard.moveCount += 1;
-  if (GameBoard.moveCount % 2 === 0) {
-    return player1;
-  }
-  return player2;
-};
-
-let loop = 0;
-const playerMove = (index) => {
-  if (GameBoard.testBoard[index] === '') {
-    loop += 1;
-    const currentPlayer = getCurrentPlayer();
-    document.querySelector(`.block${index + 1}`).textContent = currentPlayer.symbol;
-
-    GameBoard.testBoard[index] = currentPlayer.symbol;
-    currentPlayer.arr.push(index);
-    if (currentPlayer.hasWon(GameBoard.wA, currentPlayer.arr)) {
-      console.log(`${currentPlayer.name} has won!`);
-      initializeGame();
-    }
-
-    if (GameBoard.isDraw(GameBoard.moveCount)) {
-      console.log('Draw');
-    }
-  } else {
-    loop++;
-    console.log(GameBoard.testBoard[index]);
-    console.log('already clicked');
-  }
-  console.log('playerMove -> loop', loop);
 };
 
 displayController.btnListners();
