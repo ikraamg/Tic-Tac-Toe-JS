@@ -32,6 +32,7 @@ const resetGame = () => {
     block.textContent = letter;
   });
   displayController.addClass('#play-again', 'hide');
+  displayController.removeClick();
 };
 
 
