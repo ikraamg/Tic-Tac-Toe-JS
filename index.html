@@ -7,12 +7,12 @@
     <link rel="stylesheet" href="./assets/stylesheets/style.css" />
   </head>
   <body>
-    <div class="names">
-      <p class="player1"></p>
-      <p class="player2"></p>
-    </div>
     <div id="snackbar"></div>
     <h2 class="text-center">Tic Tac Toe</h2>
+    <div class="names">
+      <p>Player O:<span class="player1"></span></p>
+      <p>Player X:<span class="player2"></span></p>
+    </div>
     <form class="form text-center">
       <div class="play-form">
         <label for="player1">Player 1</label>
@@ -35,7 +35,9 @@
       <div class="block block8 hvr-glow"></div>
       <div class="block block9 hvr-glow"></div>
     </div>
-    <button class="hide" id="play-again">Play Again</button>
+    <div class="d-center">
+      <button class="hide" id="play-again">Play Again</button>
+    </div>
     <script type="module" src="./assets/js/main.js"></script>
   </body>
 </html>

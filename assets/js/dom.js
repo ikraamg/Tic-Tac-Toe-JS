@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 // eslint-disable-next-line import/extensions
 import { GameBoard } from './app.js';
 
@@ -5,20 +6,25 @@ const displayController = (() => {
   const renderBoard = (initializeGame, round) => {
     GameBoard.testBoard.forEach((letter, index) => {
       const block = document.querySelector(`.block${index + 1}`);
-      if (GameBoard.gamesPlayed === 0) {
-        block.addEventListener('click', () => round.playerMove(index, displayController, initializeGame));
-      }
-      console.log(GameBoard.gamesPlayed,"games played")
+      block.addEventListener('click', () => round.playerMove(index, displayController, initializeGame));
       block.textContent = letter;
     });
   };
 
-  const btnListners = (initializeGame) => {
+  const removeClick = () => {
+    GameBoard.testBoard.forEach((letter, index) => {
+      const block = document.querySelector(`.block${index + 1}`);
+      const newBlock = block.cloneNode(true);
+      block.parentNode.replaceChild(newBlock, block);
+    });
+  };
+
+  const btnListners = (initializeGame, resetGame) => {
     const playBtn = document.querySelector('#play');
     const resetBtn = document.querySelector('#reset');
     const playAgainBtn = document.querySelector('#play-again');
-    playBtn.addEventListener('click',  initializeGame);
-    resetBtn.addEventListener('click', initializeGame);
+    playBtn.addEventListener('click', initializeGame);
+    resetBtn.addEventListener('click', resetGame);
     playAgainBtn.addEventListener('click', initializeGame);
   };
   const replaceText = (selectorVariable, value) => {
@@ -26,22 +32,22 @@ const displayController = (() => {
     element.textContent = value;
   };
 
-  const addClass = function (selector, className) {
+  const addClass = (selector, className) => {
     const element = document.querySelector(selector);
     element.classList.add(className);
   };
 
-  const removeClass = function (selector, className) {
+  const removeClass = (selector, className) => {
     const element = document.querySelector(selector);
     element.classList.remove(className);
   };
 
-  const toggleClass = function (selector, className) {
+  const toggleClass = (selector, className) => {
     const element = document.querySelector(selector);
     element.classList.toggle(className);
   };
 
-  const snackBar = function (text) {
+  const snackBar = (text) => {
     const x = document.getElementById('snackbar');
     x.textContent = text;
     x.className = 'show';
@@ -49,7 +55,14 @@ const displayController = (() => {
   };
 
   return {
-    renderBoard, btnListners, replaceText, addClass, removeClass, toggleClass, snackBar,
+    renderBoard,
+    btnListners,
+    replaceText,
+    addClass,
+    removeClass,
+    toggleClass,
+    snackBar,
+    removeClick,
   };
 })();
 

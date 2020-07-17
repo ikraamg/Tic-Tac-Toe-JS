@@ -2,8 +2,24 @@
   text-align: center;
 }
 
+.names {
+  display: flex;
+  justify-content: space-around;
+}
+
+.player1,
+.player2 {
+  background-color: lightblue;
+}
+
 .hide {
   display: none;
+}
+
+.d-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .form {
@@ -11,6 +27,7 @@
   justify-content: center;
   margin: 10px 0;
 }
+
 .board {
   display: grid;
   justify-content: center;
@@ -37,7 +54,10 @@
   -webkit-transition-property: box-shadow;
   transition-property: box-shadow;
 }
-.hvr-glow:hover, .hvr-glow:focus, .hvr-glow:active {
+
+.hvr-glow:hover,
+.hvr-glow:focus,
+.hvr-glow:active {
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
   background-color: rgba(163, 154, 154, 0.3);
 }
@@ -67,21 +87,49 @@
 }
 
 @-webkit-keyframes fadein {
-  from {top: 0; opacity: 0;} 
-  to {top: 30px; opacity: 1;}
+  from {
+    top: 0;
+    opacity: 0;
+  }
+
+  to {
+    top: 30px;
+    opacity: 1;
+  }
 }
 
 @keyframes fadein {
-  from {top: 0; opacity: 0;}
-  to {top: 30px; opacity: 1;}
+  from {
+    top: 0;
+    opacity: 0;
+  }
+
+  to {
+    top: 30px;
+    opacity: 1;
+  }
 }
 
 @-webkit-keyframes fadeout {
-  from {top: 30px; opacity: 1;} 
-  to {top: 0; opacity: 0;}
+  from {
+    top: 30px;
+    opacity: 1;
+  }
+
+  to {
+    top: 0;
+    opacity: 0;
+  }
 }
 
 @keyframes fadeout {
-  from {top: 30px; opacity: 1;}
-  to {top: 0; opacity: 0;}
+  from {
+    top: 30px;
+    opacity: 1;
+  }
+
+  to {
+    top: 0;
+    opacity: 0;
+  }
 }
