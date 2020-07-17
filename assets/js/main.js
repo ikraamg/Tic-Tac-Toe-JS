@@ -1,18 +1,25 @@
-import { GameBoard } from './app.js';
-import { displayController, round } from './dom.js';
+import { GameBoard, GameRound } from './app.js';
+import { displayController } from './dom.js';
 
 const initializeGame = () => {
+  const round = GameRound();
+
   GameBoard.resetBoard();
-  displayController.toggleHide()
-  displayController.snackBar("Game is started")
+  displayController.toggleHide();
+  displayController.snackBar('Game is started');
   if (GameBoard.gamesPlayed === 0) {
-    round.setPlayerNames();
+    displayController.replaceText('.player1', round.player1.name);
+    displayController.replaceText('.player2', round.player2.name);
   }
+  console.log(round.count, 'in init');
   round.resetPlayerArrays();
-  round.moveCount = 0;
-  displayController.renderBoard(initializeGame);
+  // round.moveCount = 0;
+  displayController.renderBoard(initializeGame, round);
   GameBoard.gamesPlayed += 1;
-  console.log('Game started');
+};
+
+const resetGame = () => {
+
 };
 
 

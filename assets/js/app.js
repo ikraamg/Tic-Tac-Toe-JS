@@ -26,13 +26,8 @@ const GameBoard = (() => {
 
 const GameRound = () => {
   const moveCount = 0;
-  let player1;
-  let player2;
-
-  const setPlayerNames = function () {
-    player1 = Player(document.querySelector('#player1').value, 'X');
-    player2 = Player(document.querySelector('#player2').value, 'O');
-  };
+  const player1 = Player(document.querySelector('#player1').value, 'X');
+  const player2 = Player(document.querySelector('#player2').value, 'O');
 
   const resetPlayerArrays = function () {
     player1.arr = [];
@@ -40,13 +35,12 @@ const GameRound = () => {
   };
 
   const isDraw = function () {
-    console.log(this, 'this in gameround');
-    console.log('isDraw -> moveCount', this.moveCount);
     return this.moveCount > 8;
   };
 
   const getCurrentPlayer = function (player1, player2) {
     this.moveCount += 1;
+    console.log(this.moveCount);
     if (this.moveCount % 2 === 0) {
       return player1;
     }
@@ -55,27 +49,25 @@ const GameRound = () => {
 
   const playerMove = function (index, displayController, initializeGame) {
     if (GameBoard.testBoard[index] === '') {
-      console.log(this, 'in player move');
       const currentPlayer = this.getCurrentPlayer(player1, player2);
-      const currentBlock = document.querySelector(`.block${index + 1}`);
-      displayController.replaceText(currentBlock, currentPlayer.symbol);
+      displayController.replaceText(`.block${index + 1}`, currentPlayer.symbol);
       GameBoard.testBoard[index] = currentPlayer.symbol;
       currentPlayer.arr.push(index);
       if (currentPlayer.hasWon(GameBoard.wA)) {
-        console.log(`${currentPlayer.name} has won!`);
-        initializeGame();
+        displayController.snackBar(`${currentPlayer.name} has won!`);
       }
 
       if (this.isDraw()) {
-        console.log('Draw');
+        displayController.snackBar('Draw');
+        initializeGame();
       }
     } else {
-      console.log('already clicked');
+      displayController.snackBar('Please select empty block');
     }
   };
 
   return {
-    moveCount, isDraw, getCurrentPlayer, playerMove, setPlayerNames, player1, player2, resetPlayerArrays,
+    moveCount, isDraw, getCurrentPlayer, playerMove, player1, player2, resetPlayerArrays,
   };
 };
 

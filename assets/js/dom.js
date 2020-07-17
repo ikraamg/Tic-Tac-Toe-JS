@@ -1,10 +1,8 @@
 // eslint-disable-next-line import/extensions
-import { GameBoard, GameRound } from './app.js';
+import { GameBoard } from './app.js';
 
-export const round = GameRound();
-
-export const displayController = (() => {
-  const renderBoard = (initializeGame) => {
+const displayController = (() => {
+  const renderBoard = (initializeGame, round) => {
     GameBoard.testBoard.forEach((letter, index) => {
       const block = document.querySelector(`.block${index + 1}`);
       if (GameBoard.gamesPlayed === 0) {
@@ -20,36 +18,26 @@ export const displayController = (() => {
     playBtn.addEventListener('click', initializeGame);
     resetBtn.addEventListener('click', initializeGame);
   };
-  const replaceText = (element, value) => {
+  const replaceText = (selectorVariable, value) => {
+    const element = document.querySelector(selectorVariable);
     element.textContent = value;
   };
 
-  const toggleHide = function() {
+  const toggleHide = function () {
     const playForm = document.querySelector('.play-form');
     playForm.classList.toggle('hide');
   };
 
-  const snackBar = function(text) {
-    var x = document.getElementById("snackbar");
-    x.textContent = text
-    x.className = "show";
-    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-  }
+  const snackBar = function (text) {
+    const x = document.getElementById('snackbar');
+    x.textContent = text;
+    x.className = 'show';
+    setTimeout(() => { x.className = x.className.replace('show', ''); }, 3000);
+  };
 
-  return { renderBoard, btnListners, replaceText, toggleHide, snackBar };
+  return {
+    renderBoard, btnListners, replaceText, toggleHide, snackBar,
+  };
 })();
 
-
-// const initializeGame = () => {
-//   GameBoard.resetBoard();
-//   if (GameBoard.gamesPlayed === 0) {
-//     round.setPlayerNames();
-//   }
-//   round.resetPlayerArrays();
-//   round.moveCount = 0;
-//   displayController.renderBoard();
-//   GameBoard.gamesPlayed += 1;
-//   console.log('Game started');
-// };
-
-// displayController.btnListners();
+export { displayController };
