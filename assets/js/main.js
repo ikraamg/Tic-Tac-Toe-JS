@@ -31,6 +31,7 @@ const resetGame = () => {
     const block = document.querySelector(`.block${index + 1}`);
     block.textContent = letter;
   });
+  displayController.addClass('#play-again', 'hide');
 };
 
 
