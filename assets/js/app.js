@@ -16,7 +16,7 @@ const Player = (name, symbol) => {
 
 const GameBoard = (() => {
   const testBoard = ['', '', '', '', '', '', '', '', ''];
-  const gamesPlayed = 0;
+  let gamesPlayed = 0;
   const wA = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
   const resetBoard = function () { this.testBoard = ['', '', '', '', '', '', '', '', '']; };
   return {
@@ -26,8 +26,8 @@ const GameBoard = (() => {
 
 const GameRound = () => {
   const moveCount = 0;
-  const player1 = Player(document.querySelector('#player1').value, 'X');
-  const player2 = Player(document.querySelector('#player2').value, 'O');
+  const player1 = Player('', 'X');
+  const player2 = Player('', 'O');
 
   const resetPlayerArrays = function () {
     player1.arr = [];
@@ -55,11 +55,15 @@ const GameRound = () => {
       currentPlayer.arr.push(index);
       if (currentPlayer.hasWon(GameBoard.wA)) {
         displayController.snackBar(`${currentPlayer.name} has won!`);
+        this.moveCount = 0
+        displayController.removeClass('#play-again','hide')
+        // setTimeout(initializeGame,4000)
       }
 
       if (this.isDraw()) {
         displayController.snackBar('Draw');
-        initializeGame();
+        this.moveCount = 0
+        setTimeout(initializeGame,4000)
       }
     } else {
       displayController.snackBar('Please select empty block');

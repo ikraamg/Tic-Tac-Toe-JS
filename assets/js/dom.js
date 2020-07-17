@@ -8,6 +8,7 @@ const displayController = (() => {
       if (GameBoard.gamesPlayed === 0) {
         block.addEventListener('click', () => round.playerMove(index, displayController, initializeGame));
       }
+      console.log(GameBoard.gamesPlayed,"games played")
       block.textContent = letter;
     });
   };
@@ -15,17 +16,29 @@ const displayController = (() => {
   const btnListners = (initializeGame) => {
     const playBtn = document.querySelector('#play');
     const resetBtn = document.querySelector('#reset');
-    playBtn.addEventListener('click', initializeGame);
+    const playAgainBtn = document.querySelector('#play-again');
+    playBtn.addEventListener('click',  initializeGame);
     resetBtn.addEventListener('click', initializeGame);
+    playAgainBtn.addEventListener('click', initializeGame);
   };
   const replaceText = (selectorVariable, value) => {
     const element = document.querySelector(selectorVariable);
     element.textContent = value;
   };
 
-  const toggleHide = function () {
-    const playForm = document.querySelector('.play-form');
-    playForm.classList.toggle('hide');
+  const addClass = function (selector, className) {
+    const element = document.querySelector(selector);
+    element.classList.add(className);
+  };
+
+  const removeClass = function (selector, className) {
+    const element = document.querySelector(selector);
+    element.classList.remove(className);
+  };
+
+  const toggleClass = function (selector, className) {
+    const element = document.querySelector(selector);
+    element.classList.toggle(className);
   };
 
   const snackBar = function (text) {
@@ -36,7 +49,7 @@ const displayController = (() => {
   };
 
   return {
-    renderBoard, btnListners, replaceText, toggleHide, snackBar,
+    renderBoard, btnListners, replaceText, addClass, removeClass, toggleClass, snackBar,
   };
 })();
 
