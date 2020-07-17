@@ -23,7 +23,20 @@ export const displayController = (() => {
   const replaceText = (element, value) => {
     element.textContent = value;
   };
-  return { renderBoard, btnListners, replaceText };
+
+  const toggleHide = function() {
+    const playForm = document.querySelector('.play-form');
+    playForm.classList.toggle('hide');
+  };
+
+  const snackBar = function(text) {
+    var x = document.getElementById("snackbar");
+    x.textContent = text
+    x.className = "show";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+  }
+
+  return { renderBoard, btnListners, replaceText, toggleHide, snackBar };
 })();
 
 

@@ -3,6 +3,8 @@ import { displayController, round } from './dom.js';
 
 const initializeGame = () => {
   GameBoard.resetBoard();
+  displayController.toggleHide()
+  displayController.snackBar("Game is started")
   if (GameBoard.gamesPlayed === 0) {
     round.setPlayerNames();
   }
