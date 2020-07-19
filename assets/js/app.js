@@ -29,8 +29,8 @@ const GameBoard = (() => {
 
 const GameRound = () => {
   const moveCount = 0;
-  const player1 = Player('', 'X');
-  const player2 = Player('', 'O');
+  const player1 = Player('', 'O');
+  const player2 = Player('', 'X');
 
   const resetPlayerArrays = function () {
     player1.arr = [];
