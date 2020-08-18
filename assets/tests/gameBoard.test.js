@@ -1,7 +1,7 @@
 import { GameBoard } from '../js/app';
 
 
-GameBoard.testBoard = ['1', '2', '', '', '', '', '', '', '']
+GameBoard.testBoard = ['1', '2', '', '', '', '', '', '', ''];
 
 test('it ensures testBoard is not reset', () => {
   expect(GameBoard.testBoard).not.toEqual(['', '', '', '', '', '', '', '', '']);
