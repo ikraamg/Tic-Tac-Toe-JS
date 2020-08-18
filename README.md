@@ -5,6 +5,7 @@
 # Tic Tac Toe JavaScript
 
 > In this project we built Tic Tac Toe web game using JavaScript.Two players can play against each other. App uses factory functions and modules to create objects and methods.
+> Jest was used to run unit tests for all public methods.
 
 ![screenshot](https://user-images.githubusercontent.com/34813339/87792786-aa607180-c844-11ea-8e2f-1e533bc01857.png)
 
@@ -13,10 +14,13 @@
 - HTML
 - CSS
 - JavaScript
+- WebPack
+- Jest
+- NodeJS
 
 ## Live Demo
 
-[Click here](https://raw.githack.com/ikraamg/Tic-Tac-Toe-JS/game-feature/index.html)
+[Click here](https://raw.githack.com/ikraamg/Tic-Tac-Toe-JS/unit-tests/dist/index.html)
 
 ## Getting Started
 
@@ -27,11 +31,18 @@ To get a local copy up and running follow these steps:
 - Basic knowledge of Html, CSS and JavaScript
 - A Code Editor
 - Git
+- node.js
 
 ### Usage
 
 - Fork/Clone this project to your local machine
-- Open `index.html` in your browser
+- Run `npm install` to install node dependencies
+- Run `npm run build` to run webpack
+- Open `./dist/index.html` in your browser
+
+### Tests
+
+- Run `npx jest` to run all tests in your console
 
 ## Authors
 
