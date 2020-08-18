@@ -1,6 +1,7 @@
 /* eslint-disable import/extensions */
 import { GameBoard, GameRound } from './app.js';
 import { displayController } from './dom.js';
+import '../stylesheets/style.scss';
 
 const round = GameRound();
 const initializeGame = () => {
