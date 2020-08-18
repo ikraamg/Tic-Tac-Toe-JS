@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tic Tac Toe</title>
+  </head>
+  <body>
+    <div id="snackbar"></div>
+    <h2 class="text-center">Tic Tac Toe</h2>
+    <div class="names">
+      <p>Player O:<span class="player1"></span></p>
+      <p>Player X:<span class="player2"></span></p>
+    </div>
+    <form class="form text-center">
+      <div class="play-form">
+        <label for="player1">Player O</label>
+        <input type="text" name="player1" id="player1" />
+        <label for="player1">Player X</label>
+        <input type="text" name="player2" id="player2" />
+        <button type="button" id="play">Play</button>
+      </div>
+      <button type="reset" id="reset">Reset</button>
+    </form>
+    <hr />
+    <div class="board">
+      <div class="block block1 hvr-glow"></div>
+      <div class="block block2 hvr-glow"></div>
+      <div class="block block3 hvr-glow"></div>
+      <div class="block block4 hvr-glow"></div>
+      <div class="block block5 hvr-glow"></div>
+      <div class="block block6 hvr-glow"></div>
+      <div class="block block7 hvr-glow"></div>
+      <div class="block block8 hvr-glow"></div>
+      <div class="block block9 hvr-glow"></div>
+    </div>
+    <div class="d-center">
+      <button class="hide" id="play-again">Play Again</button>
+    </div>
+    <script src="./bundle.js"></script>
+  </body>
+</html>
