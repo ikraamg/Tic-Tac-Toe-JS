@@ -1,8 +1,10 @@
 /* eslint-disable import/extensions */
 import { GameBoard, GameRound } from './app.js';
 import { displayController } from './dom.js';
+import '../stylesheets/style.scss';
 
 const round = GameRound();
+
 const initializeGame = () => {
   const name1 = document.querySelector('#player1').value;
   const name2 = document.querySelector('#player2').value;
@@ -20,7 +22,7 @@ const initializeGame = () => {
   round.resetPlayerArrays();
   round.moveCount = 0;
   displayController.renderBoard(initializeGame, round);
-  GameBoard.gamesPlayed += 1;
+  GameBoard.incrementGameCount();
 };
 
 const resetGame = () => {
