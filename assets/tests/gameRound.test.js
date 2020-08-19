@@ -5,7 +5,6 @@ const newGameRound = GameRound();
 newGameRound.player1.arr = [2, 3, 4];
 newGameRound.player2.arr = [0, 1, 2];
 
-
 describe('resetting of player arrays', () => {
   test('it ensures playerArray is not empty', () => {
     expect(newGameRound.player1.arr).not.toEqual([]);
@@ -37,6 +36,12 @@ describe('checking if current player can be obtained', () => {
     expect(newGameRound.getCurrentPlayer(newGameRound.player1, newGameRound.player2))
       .toBe(newGameRound.player2);
   });
+
+  test('if getCurrentPlayer return player 1 for odd numbers', () => {
+    newGameRound.moveCount = 1;
+    expect(newGameRound.getCurrentPlayer(newGameRound.player1, newGameRound.player2))
+      .toBe(newGameRound.player1);
+  });
 });
 
 describe('playerMove functionality except the already tested isDraw and hasWon', () => {
@@ -48,10 +53,10 @@ describe('playerMove functionality except the already tested isDraw and hasWon',
   });
 
   test('to see if testBoard has been updated correctly', () => {
-    expect(GameBoard.testBoard[2]).toEqual(newGameRound.player1.symbol);
+    expect(GameBoard.testBoard[2]).toEqual(newGameRound.player2.symbol);
   });
 
   test('to see if playerArr has been updated correctly', () => {
-    expect(newGameRound.player1.arr).toEqual([2]);
+    expect(newGameRound.player2.arr).toEqual([2]);
   });
 });

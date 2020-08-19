@@ -19,11 +19,13 @@ const Player = (name, symbol) => {
 const GameBoard = (() => {
   const testBoard = ['', '', '', '', '', '', '', '', ''];
   const gamesPlayed = 0;
+  const incrementGameCount = function () { this.gamesPlayed += 1; };
+
   const wA = [[0, 1, 2],
     [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
   const resetBoard = function () { this.testBoard = ['', '', '', '', '', '', '', '', '']; };
   return {
-    testBoard, gamesPlayed, wA, resetBoard,
+    testBoard, gamesPlayed, wA, resetBoard, incrementGameCount,
   };
 })();
 

@@ -17,5 +17,6 @@ test('it tests if winning conditions are correct', () => {
 });
 
 test('it tests if played games number is correct', () => {
-  expect(GameBoard.gamesPlayed).toEqual(0);
+  GameBoard.incrementGameCount();
+  expect(GameBoard.gamesPlayed).toEqual(1);
 });
